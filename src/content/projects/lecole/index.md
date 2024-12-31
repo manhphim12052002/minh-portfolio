@@ -13,7 +13,7 @@ We're modernizing education in Vietnam and beyond with AI-powered SAT prep.
 
 ## Key Features
 
-<iframe src="https://www.youtube.com/watch?v=sYAHM-dBaxg&list=TLGGlE2ZdQFnIRozMDEyMjAyNA&t=5s" width="560" height="315" frameborder="0" allowfullscreen title="LECOLE AI">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/sYAHM-dBaxg?si=hCkwoBeXwUKjEZUJ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
 </iframe>
 
 - AI-powered learning
