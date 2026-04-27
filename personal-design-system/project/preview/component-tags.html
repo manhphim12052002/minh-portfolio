@@ -1,0 +1,26 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css"><style>
+.row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.tag { font-family: var(--font-sans); font-size: 12px; font-weight: 500; padding: 4px 10px; border-radius: 999px; display: inline-flex; align-items: center; gap: 6px; }
+.tag .dot { width: 6px; height: 6px; border-radius: 999px; }
+.blue { background: var(--lumen-sky); color: var(--lumen-ink); }
+.blue .dot { background: var(--lumen-deep); }
+.neutral { background: var(--lumen-stone-100); color: var(--lumen-stone-700); }
+.neutral .dot { background: var(--lumen-stone-400); }
+.accent { background: var(--lumen-ember-soft); color: #7A5E2E; }
+.accent .dot { background: var(--lumen-ember); }
+.outline { background: transparent; border: 1px solid var(--lumen-stone-200); color: var(--fg-2); }
+.chip { font-family: var(--font-mono); font-size: 11px; padding: 3px 8px; border-radius: 4px; background: var(--surface-soft); color: var(--fg-2); }
+</style></head><body><div class="card">
+<div class="row" style="margin-bottom:14px">
+  <span class="tag blue"><span class="dot"></span>now</span>
+  <span class="tag neutral"><span class="dot"></span>draft</span>
+  <span class="tag accent"><span class="dot"></span>new</span>
+  <span class="tag outline">archive</span>
+</div>
+<div class="row">
+  <span class="chip">v0.1</span>
+  <span class="chip">⌘K</span>
+  <span class="chip">47.6062° N</span>
+  <span class="chip">seattle</span>
+</div>
+</div></body></html>

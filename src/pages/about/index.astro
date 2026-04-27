@@ -1,0 +1,27 @@
+---
+import PageLayout from "@layouts/PageLayout.astro";
+import Container from "@components/Container.astro";
+import Eyebrow from "@components/Eyebrow.astro";
+---
+
+<PageLayout title="About" description="A few words about who I am and what I'm thinking about.">
+  <Container>
+    <div class="animate space-y-3">
+      <Eyebrow>ABOUT</Eyebrow>
+      <h1 class="font-display font-medium text-4xl md:text-6xl leading-[1.04] tracking-[-0.03em] text-fg-1 mt-3">
+        Hi, I'm Minh.
+      </h1>
+    </div>
+    <div class="animate mt-10 space-y-4 max-w-prose">
+      <p class="font-sans text-xl text-fg-2 leading-snug tracking-[-0.01em]">
+        I spend my days building software at TomTom, my evenings co-founding
+        <a href="https://lecole.com" class="lumen-underline">LECOLE</a>,
+        and the spaces in between trying to design tools that respect the people who use them.
+      </p>
+      <p class="font-sans text-base text-fg-2 leading-relaxed">
+        This site is where I think out loud — about software, learning, and the strange business
+        of making digital things feel calmer.
+      </p>
+    </div>
+  </Container>
+</PageLayout>

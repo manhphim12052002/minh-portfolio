@@ -4,22 +4,24 @@ import Container from "@components/Container.astro";
 import PageLayout from "@layouts/PageLayout.astro";
 import ArrowCard from "@components/ArrowCard.astro";
 import Link from "@components/Link.astro";
+import Eyebrow from "@components/Eyebrow.astro";
+import FormattedDate from "@components/FormattedDate.astro";
 import { dateRange } from "@lib/utils";
-import { SITE, HOME, SOCIALS } from "@consts";
+import { SITE, HOME } from "@consts";
 
-const blog = (await getCollection("blog"))
+const writing = (await getCollection("writing"))
   .filter(post => !post.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0,SITE.NUM_POSTS_ON_HOMEPAGE);
+  .slice(0, SITE.NUM_POSTS_ON_HOMEPAGE);
 
 const projects = (await getCollection("projects"))
   .filter(project => !project.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0,SITE.NUM_PROJECTS_ON_HOMEPAGE);
+  .slice(0, SITE.NUM_PROJECTS_ON_HOMEPAGE);
 
 const allwork = (await getCollection("work"))
   .sort((a, b) => new Date(b.data.dateStart).valueOf() - new Date(a.data.dateStart).valueOf())
-  .slice(0,SITE.NUM_WORKS_ON_HOMEPAGE);
+  .slice(0, SITE.NUM_WORKS_ON_HOMEPAGE);
 
 const work = await Promise.all(
   allwork.map(async (item) => {
@@ -27,69 +29,76 @@ const work = await Promise.all(
     return { ...item, Content };
   })
 );
-
 ---
 
 <PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
   <Container>
-    <h4 class="animate font-semibold text-black dark:text-white">
-      Hi, I'm Minh Pham <span class="text-xl">👋🏻</span> 
-    </h4>
-    <div class="space-y-16">
-      <section>
-        <article class="space-y-4">
-          <p class="animate">
-            I am a Software Engineer at TomTom, Netherlands 🇳🇱 and co-founder at LECOLE, an edtech company focus on standardized test prep. 
-          </p>
-          <p class="animate">
-            I am passionate about building products that make a difference in people's lives. I love to learn new things, share my knowledge, and help others grow. 
-          </p>
-          <p class="animate">
-            I write about web development, software engineering, and my journey in tech, and life stories.
-          </p>
-        </article>
-      </section>
 
+    <!-- Hero -->
+    <section class="animate space-y-5 pb-16 border-b border-border">
+      <Eyebrow pulse>AVAILABLE · 2026</Eyebrow>
+      <h1 class="font-display font-medium text-5xl md:text-7xl leading-[1.02] tracking-[-0.03em] text-fg-1">
+        Building quiet software,<br/>
+        <em class="not-italic font-normal text-deep">one careful detail at a time.</em>
+      </h1>
+      <p class="font-sans text-xl text-fg-2 mt-5 max-w-prose leading-snug tracking-[-0.01em]">
+        I'm Minh — a software engineer at TomTom and co-founder of LECOLE.
+        I write about what I build and what it teaches me.
+      </p>
+    </section>
+
+    <div class="space-y-16 pt-16">
+
+      <!-- Selected writing -->
       <section class="animate space-y-6">
         <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-semibold text-black dark:text-white">
-            Latest posts
-          </h5>
-          <Link href="/blog">
-            See all posts
-          </Link>
+          <div class="space-y-1">
+            <Eyebrow>RECENT WRITING</Eyebrow>
+            <h2 class="font-display font-medium text-2xl text-fg-1 tracking-tight">What I've been thinking about</h2>
+          </div>
+          <Link href="/writing">See all</Link>
         </div>
         <ul class="flex flex-col gap-4">
-          {blog.map(post => (
+          {writing.map(post => (
             <li>
-              <ArrowCard entry={post} />
+              <a
+                href={`/writing/${post.slug}`}
+                class="flex items-baseline gap-5 py-3 border-t border-border group hover:pl-2 transition-[padding] duration-[220ms] ease-out"
+              >
+                <FormattedDate date={post.data.date} />
+                <span class="font-sans font-semibold text-fg-1 text-base leading-snug tracking-tight group-hover:text-deep transition-colors duration-[220ms]">
+                  {post.data.title}
+                </span>
+              </a>
             </li>
           ))}
         </ul>
       </section>
 
+      <!-- Work experience -->
       <section class="animate space-y-6">
         <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-semibold text-black dark:text-white">
-            Work Experience
-          </h5>
-          <Link href="/work">
-            See all work
-          </Link>
+          <div class="space-y-1">
+            <Eyebrow>WHERE I WORK</Eyebrow>
+            <h2 class="font-display font-medium text-2xl text-fg-1 tracking-tight">Experience</h2>
+          </div>
+          <Link href="/work">See all</Link>
         </div>
-        <ul class="flex flex-col space-y-4">
+        <ul class="flex flex-col divide-y divide-border">
           {work.map(entry => (
-            <li>
-              <div class="text-sm opacity-75">
-                {dateRange(entry.data.dateStart, entry.data.dateEnd)}
+            <li class="py-6">
+              <div class="flex flex-wrap gap-x-4 gap-y-1 items-baseline mb-3">
+                <span class="font-mono text-xs uppercase tracking-[0.1em] text-fg-3">
+                  {dateRange(entry.data.dateStart, entry.data.dateEnd)}
+                </span>
+                <span class="font-sans font-semibold text-fg-1">
+                  {entry.data.company}
+                </span>
+                <span class="font-sans text-sm text-fg-2">
+                  {entry.data.role}
+                </span>
               </div>
-              <div class="font-semibold text-black dark:text-white">
-                {entry.data.company}
-              </div>
-              <div class="text-sm opacity-75">
-                {entry.data.role}
-              </div>
-              <article>
+              <article class="lumen-prose">
                 <entry.Content />
               </article>
             </li>
@@ -97,16 +106,16 @@ const work = await Promise.all(
         </ul>
       </section>
 
+      <!-- Recent projects -->
       <section class="animate space-y-6">
         <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-semibold text-black dark:text-white">
-            Recent projects
-          </h5>
-          <Link href="/projects">
-            See all projects
-          </Link>
+          <div class="space-y-1">
+            <Eyebrow>RECENT PROJECTS</Eyebrow>
+            <h2 class="font-display font-medium text-2xl text-fg-1 tracking-tight">Things I've built</h2>
+          </div>
+          <Link href="/projects">See all</Link>
         </div>
-        <ul class="flex flex-col gap-4">
+        <ul class="grid grid-cols-1 md:grid-cols-2 gap-5">
           {projects.map(project => (
             <li>
               <ArrowCard entry={project} />
@@ -115,32 +124,6 @@ const work = await Promise.all(
         </ul>
       </section>
 
-      <section class="animate space-y-4">
-        <h5 class="font-semibold text-black dark:text-white">
-          Let's Connect
-        </h5>
-        <article>
-          <p>
-            If you want to get in touch with me about something or just to say hi,
-            reach out on social media or send me an email.
-          </p>
-        </article>
-        <ul class="flex flex-wrap gap-2">
-          {SOCIALS.map(SOCIAL => (
-            <li class="flex gap-x-2 text-nowrap">
-              <Link href={SOCIAL.HREF} external aria-label={`${SITE.NAME} on ${SOCIAL.NAME}`}>
-                {SOCIAL.NAME}
-              </Link>
-              {"/"}
-            </li>
-          ))}
-          <li class="line-clamp-1">
-            <Link href={`mailto:${SITE.EMAIL}`} aria-label={`Email ${SITE.NAME}`}>
-              {SITE.EMAIL}
-            </Link>
-          </li>
-        </ul>
-      </section>
     </div>
   </Container>
 </PageLayout>

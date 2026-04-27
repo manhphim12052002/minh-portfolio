@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>writing — lumen</title>
+<link rel="stylesheet" href="styles.css"/>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" src="Reader.jsx"></script>
+<script type="text/babel">
+function App() {
+  const [view, setView] = React.useState(() => {
+    try { return JSON.parse(localStorage.getItem('lumen_writing_view')) || { name: 'index' }; }
+    catch { return { name: 'index' }; }
+  });
+  React.useEffect(() => {
+    localStorage.setItem('lumen_writing_view', JSON.stringify(view));
+    window.scrollTo(0, 0);
+  }, [view]);
+  const current = view.name === 'article' ? ARTICLES_DATA.find(a => a.id === view.id) : null;
+  return (
+    <div data-screen-label={view.name === 'index' ? '01 writing index' : '02 article'}>
+      <ReaderChrome view={view} currentTitle={current?.title} setView={setView}/>
+      {view.name === 'index'
+        ? <ArticleIndex setView={setView}/>
+        : <ArticleReader id={view.id} setView={setView}/>}
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>

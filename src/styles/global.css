@@ -1,3 +1,172 @@
+/* =========================================================================
+   Satoshi — self-hosted (brand font)
+   ========================================================================= */
+@font-face { font-family: 'Satoshi'; src: url('/fonts/Satoshi-Light.otf') format('opentype'); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Satoshi'; src: url('/fonts/Satoshi-Italic.otf') format('opentype'); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Satoshi'; src: url('/fonts/Satoshi-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Satoshi'; src: url('/fonts/Satoshi-Medium.otf') format('opentype'); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Satoshi'; src: url('/fonts/Satoshi-MediumItalic.otf') format('opentype'); font-weight: 500; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Satoshi'; src: url('/fonts/Satoshi-Bold.otf') format('opentype'); font-weight: 700; font-style: normal; font-display: swap; }
+
+/* =========================================================================
+   Lumen Design System — CSS Custom Properties
+   ========================================================================= */
+:root {
+  /* ---- Core palette: calm blue pastels ---- */
+  --lumen-mist:        #F4F7FB;
+  --lumen-cloud:       #E6EEF7;
+  --lumen-sky:         #D6E3F0;
+  --lumen-horizon:     #AEC9E8;
+  --lumen-azure:       #7FA8D4;
+  --lumen-deep:        #4A7AB8;
+  --lumen-ink:         #1E3A5F;
+  --lumen-night:       #0F2038;
+
+  /* ---- Warm accent (single, restrained) ---- */
+  --lumen-ember:       #E8B896;
+  --lumen-ember-soft:  #F5E4D6;
+
+  /* ---- Neutrals (cool-biased) ---- */
+  --lumen-paper:       #FBFBFC;
+  --lumen-white:       #FFFFFF;
+  --lumen-stone-50:    #F5F6F8;
+  --lumen-stone-100:   #E9ECF1;
+  --lumen-stone-200:   #D4D9E1;
+  --lumen-stone-300:   #B3BAC6;
+  --lumen-stone-400:   #8992A2;
+  --lumen-stone-500:   #5F6A7D;
+  --lumen-stone-600:   #424C5E;
+  --lumen-stone-700:   #2D3544;
+  --lumen-stone-800:   #1B2130;
+  --lumen-stone-900:   #0E1220;
+
+  /* ---- Semantic (light mode default) ---- */
+  --bg:                var(--lumen-mist);
+  --bg-raised:         var(--lumen-white);
+  --bg-sunken:         var(--lumen-cloud);
+  --surface:           var(--lumen-white);
+  --surface-soft:      var(--lumen-stone-50);
+
+  --fg:                var(--lumen-night);
+  --fg-1:              var(--lumen-night);
+  --fg-2:              #2D3544;
+  --fg-3:              #424C5E;
+  --fg-4:              #5F6A7D;
+
+  --border:            var(--lumen-stone-100);
+  --border-strong:     var(--lumen-stone-200);
+  --divider:           var(--lumen-stone-100);
+
+  --accent:            var(--lumen-deep);
+  --accent-hover:      var(--lumen-ink);
+  --accent-soft:       var(--lumen-sky);
+  --accent-fg:         var(--lumen-white);
+
+  --warm:              var(--lumen-ember);
+  --warm-soft:         var(--lumen-ember-soft);
+
+  --success:           #5B8F7A;
+  --warning:           #C9A05C;
+  --danger:            #B56A6A;
+
+  /* ---- Type families ---- */
+  --font-sans:         'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display:      'Clash Display', 'Satoshi', -apple-system, sans-serif;
+  --font-serif:        var(--font-display);
+  --font-mono:         'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
+
+  /* ---- Type scale ---- */
+  --text-2xs:  11px;
+  --text-xs:   12px;
+  --text-sm:   14px;
+  --text-base: 16px;
+  --text-md:   18px;
+  --text-lg:   22px;
+  --text-xl:   28px;
+  --text-2xl:  36px;
+  --text-3xl:  48px;
+  --text-4xl:  64px;
+  --text-5xl:  88px;
+
+  --leading-tight: 1.1;
+  --leading-snug:  1.25;
+  --leading-normal:1.5;
+  --leading-loose: 1.7;
+
+  --tracking-tight:  -0.02em;
+  --tracking-normal:  0em;
+  --tracking-wide:    0.04em;
+  --tracking-caps:    0.12em;
+
+  /* ---- Spacing (4px base) ---- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+
+  /* ---- Radii ---- */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 28px;
+  --radius-full: 999px;
+
+  /* ---- Shadows — soft, cool-tinted ---- */
+  --shadow-xs:    0 1px 2px rgba(30, 58, 95, 0.06);
+  --shadow-sm:    0 2px 8px rgba(30, 58, 95, 0.06), 0 1px 2px rgba(30, 58, 95, 0.04);
+  --shadow-md:    0 8px 24px rgba(30, 58, 95, 0.08), 0 2px 6px rgba(30, 58, 95, 0.04);
+  --shadow-lg:    0 24px 48px rgba(30, 58, 95, 0.10), 0 4px 12px rgba(30, 58, 95, 0.05);
+  --shadow-inset: inset 0 1px 2px rgba(30, 58, 95, 0.06);
+  --glow-accent:  0 0 0 4px rgba(74, 122, 184, 0.12);
+
+  /* ---- Motion ---- */
+  --ease-out:    cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.6, 0, 0.4, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur-fast:    140ms;
+  --dur-base:    220ms;
+  --dur-slow:    420ms;
+
+  /* ---- Prose link underline (light mode) ---- */
+  --link-underline: rgba(74, 122, 184, 0.18);
+}
+
+/* ---- Dark mode — bridge: Astro Nano uses html.dark; Lumen uses [data-theme="dark"] ---- */
+html.dark,
+[data-theme="dark"] {
+  --bg:            var(--lumen-night);
+  --bg-raised:     var(--lumen-stone-800);
+  --bg-sunken:     #0A1525;
+  --surface:       var(--lumen-stone-800);
+  --surface-soft:  var(--lumen-stone-700);
+
+  --fg-1:          #E6EDF7;
+  --fg-2:          #A8B5CA;
+  --fg-3:          #7A8599;
+  --fg-4:          #5A657A;
+
+  --border:        rgba(255, 255, 255, 0.06);
+  --border-strong: rgba(255, 255, 255, 0.12);
+  --divider:       rgba(255, 255, 255, 0.06);
+
+  --accent:        var(--lumen-horizon);
+  --accent-hover:  var(--lumen-azure);
+  --accent-soft:   rgba(174, 201, 232, 0.14);
+  --accent-fg:     var(--lumen-night);
+
+  /* ---- Prose link underline (dark mode) ---- */
+  --link-underline: rgba(174, 201, 232, 0.22);
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -17,20 +186,18 @@ body {
 }
 
 body {
-  @apply font-sans antialiased;
+  background-color: var(--bg);
+  color: var(--fg-1);
+  font-family: var(--font-sans);
+  @apply antialiased;
   @apply flex flex-col;
-  @apply bg-stone-100 dark:bg-stone-900;
-  @apply text-black/50 dark:text-white/75;
 }
 
-header {
-  @apply fixed top-0 left-0 right-0 z-50 py-5;
-  @apply bg-stone-100/75 dark:bg-stone-900/25;
-  @apply backdrop-blur-sm saturate-200;
-}
+/* header base styles are handled by Header.astro (sticky + glass).
+   The old fixed/glass rules were replaced in P2. */
 
 main {
-  @apply flex-1 py-32;
+  @apply flex-1 py-16 md:py-20;
 }
 
 footer {
@@ -38,36 +205,312 @@ footer {
 }
 
 article {
+  /* Typography plugin classes for fallback; Lumen prose overrides applied via .prose-lumen on detail pages */
   @apply max-w-full prose dark:prose-invert prose-img:mx-auto prose-img:my-auto;
-  @apply prose-headings:font-semibold prose-p:font-serif;
-  @apply prose-headings:text-black prose-headings:dark:text-white;
 }
 
-@layer utilities {
-  article a {
-    @apply font-sans text-current underline underline-offset-2;
-    @apply decoration-black/15 dark:decoration-white/30;
-    @apply transition-colors duration-300 ease-in-out;
-  }
-  article a:hover {
-    @apply text-black dark:text-white;
-    @apply decoration-black/25 dark:decoration-white/50;
-  }
+/* =========================================================================
+   Lumen typography — emphasis through weight, not slant
+   em: weight-500 medium, fg-1 color, no italic slant
+   strong: weight-700 bold, fg-1 color
+   ========================================================================= */
+em {
+  font-style: normal;
+  font-weight: 500;
+  color: var(--fg-1);
 }
 
+strong {
+  font-weight: 700;
+  color: var(--fg-1);
+}
+
+/* ---- Scroll-triggered entrance animation using Lumen motion tokens ---- */
 .animate {
-  @apply opacity-0 translate-y-3;
-  @apply transition-all duration-700 ease-out;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out);
 }
 
 .animate.show {
-  @apply opacity-100 translate-y-0;
+  opacity: 1;
+  transform: translateY(0);
 }
 
+/* ---- Back-to-top visibility controlled by .scrolled on html ---- */
 html #back-to-top {
   @apply opacity-0 pointer-events-none;
 }
 
 html.scrolled #back-to-top {
   @apply opacity-100 pointer-events-auto;
+}
+
+/* =========================================================================
+   P2 — Glass nav background + scrolled divider
+   Tailwind opacity modifiers silently fail on CSS-var-backed colors, so we
+   resolve the rgba inline. Single --bg-glass token is overridden in dark
+   scope so the header auto-respects the theme via plain CSS — no JS needed.
+   ========================================================================= */
+:root {
+  --bg-glass: rgba(244, 247, 251, 0.72);
+}
+
+html.dark,
+[data-theme="dark"] {
+  --bg-glass: rgba(14, 32, 56, 0.72);
+}
+
+#site-header {
+  background-color: var(--bg-glass);
+}
+
+html.scrolled #site-header {
+  border-bottom-color: var(--divider);
+}
+
+/* =========================================================================
+   P2 — Brand tile
+   ========================================================================= */
+.brand-tile {
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  background: var(--lumen-ink);
+  color: var(--lumen-mist);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 17px;
+  line-height: 1;
+  position: relative;
+  flex-shrink: 0;
+}
+
+/* Ember dot top-right of brand tile */
+.brand-tile::after {
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--lumen-ember);
+  top: 5px;
+  right: 5px;
+}
+
+/* =========================================================================
+   P2 — Nav links
+   ========================================================================= */
+.nav-link {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--fg-1);
+  padding: 6px 10px;
+  border-radius: 8px;
+  opacity: 0.72;
+  transition: all 180ms var(--ease-out);
+  text-decoration: none;
+  position: relative;
+}
+
+.nav-link:hover {
+  opacity: 1;
+  background-color: var(--accent-soft);
+}
+
+.nav-link.active {
+  opacity: 1;
+  font-weight: 600;
+}
+
+/* 2px Ember underline for active nav link */
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 10px;
+  right: 10px;
+  height: 2px;
+  background: var(--lumen-ember);
+  border-radius: 2px;
+}
+
+/* =========================================================================
+   P3 — Animated link underline (Lumen gradient-swap pattern)
+   Note: cannot use Tailwind bg-opacity shorthands on CSS-var-backed colors;
+   rgba() values are inlined below.
+   ========================================================================= */
+.lumen-underline {
+  background: linear-gradient(to top, rgba(74, 122, 184, 0.18) 0, rgba(74, 122, 184, 0.18) 100%);
+  background-size: 100% 2px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: all 180ms var(--ease-out);
+}
+
+.lumen-underline:hover {
+  background-size: 100% 100%;
+  color: var(--lumen-ink);
+}
+
+html.dark .lumen-underline:hover {
+  color: var(--lumen-mist);
+}
+
+/* =========================================================================
+   P3 — Pulse dot for Eyebrow component
+   ========================================================================= */
+@keyframes lumen-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+.lumen-pulse {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--success);
+  animation: lumen-pulse 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+/* =========================================================================
+   P4 — Lumen prose — inline MDX bodies (work entries, home work section)
+   Lighter than full Tailwind `prose`; scoped to avoid conflict with P5 detail pages.
+   ========================================================================= */
+.lumen-prose {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--fg-2);
+}
+
+.lumen-prose p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.lumen-prose a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 180ms var(--ease-out);
+}
+
+.lumen-prose a:hover {
+  color: var(--accent-hover);
+}
+
+/* =========================================================================
+   P5 — Lumen lead paragraph (dek / description below h1)
+   Matches Lumen Reader .dek style: 22px, fg-2, -0.01em tracking
+   ========================================================================= */
+.lumen-lead {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 1.5;
+  color: var(--fg-2);
+  margin: 0 0 40px;
+  text-wrap: pretty;
+  letter-spacing: -0.01em;
+}
+
+/* =========================================================================
+   P5 — Prose Lumen: full reader typography applied to detail page <article>
+   Using :where() keeps specificity flat so dark:prose-invert can still work.
+   All color values use CSS vars that flip in dark scope — no explicit dark
+   selectors needed except for link underline alpha.
+   ========================================================================= */
+
+/* Headings: display font, medium weight, tight tracking */
+.prose-lumen :where(h1, h2, h3, h4, h5, h6):not(:where([class~="not-prose"] *)) {
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  color: var(--fg-1);
+}
+
+/* h2 specific sizing */
+.prose-lumen :where(h2):not(:where([class~="not-prose"] *)) {
+  font-size: 28px;
+  line-height: 1.25;
+  margin-top: 40px;
+  margin-bottom: 14px;
+}
+
+/* Body paragraphs: 18px Satoshi, 1.7 leading */
+.prose-lumen :where(p):not(:where([class~="not-prose"] *)) {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--fg-1);
+  letter-spacing: -0.005em;
+  margin-bottom: 22px;
+  text-wrap: pretty;
+}
+
+/* Drop cap on opening paragraph only — Lumen pattern */
+.prose-lumen :where(p):first-child::first-letter {
+  font-family: var(--font-display);
+  font-size: 68px;
+  line-height: 0.85;
+  float: left;
+  padding: 6px 10px 0 0;
+  font-weight: 500;
+  color: var(--lumen-ink);
+}
+
+/* Blockquote → Ember pullquote */
+.prose-lumen :where(blockquote):not(:where([class~="not-prose"] *)) {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 1.35;
+  color: var(--fg-1);
+  border-left: 2px solid var(--lumen-ember);
+  padding-left: 22px;
+  letter-spacing: -0.02em;
+  margin: 36px 0;
+  text-wrap: pretty;
+}
+
+/* Strip default prose <p> inside blockquote */
+.prose-lumen :where(blockquote p):not(:where([class~="not-prose"] *)) {
+  margin: 0;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+  font-family: inherit;
+}
+
+/* Body links: animated gradient-swap underline */
+.prose-lumen :where(a):not(:where([class~="not-prose"] *)) {
+  color: var(--lumen-deep);
+  background: linear-gradient(to top, var(--link-underline) 0, var(--link-underline) 100%);
+  background-size: 100% 2px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: all 180ms;
+  text-decoration: none;
+}
+
+.prose-lumen :where(a):not(:where([class~="not-prose"] *)):hover {
+  background-size: 100% 100%;
+  color: var(--lumen-ink);
+}
+
+/* Inline code: mono font + soft surface bg */
+.prose-lumen :where(code):not(:where([class~="not-prose"] *, pre *)) {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  background: var(--surface-soft);
+  padding: 0.1em 0.35em;
+  border-radius: var(--radius-xs);
+  color: var(--fg-1);
 }

@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import PageLayout from "@layouts/PageLayout.astro";
 import Container from "@components/Container.astro";
+import Eyebrow from "@components/Eyebrow.astro";
 import { dateRange } from "@lib/utils";
 import { WORK } from "@consts";
 
@@ -14,38 +15,46 @@ const work = await Promise.all(
     return { ...item, Content };
   })
 );
+
+// Compute year range for eyebrow (handle "Current" as string endDate)
+const startYear = work.length
+  ? Math.min(...work.map(e => e.data.dateStart.getFullYear()))
+  : new Date().getFullYear();
+const endYear = work.some(e => typeof e.data.dateEnd === "string")
+  ? "Present"
+  : Math.max(...work.map(e => (e.data.dateEnd as Date).getFullYear())).toString();
 ---
 
 <PageLayout title={WORK.TITLE} description={WORK.DESCRIPTION}>
   <Container>
-    <div class="space-y-10">
-      <div class="animate font-semibold text-black dark:text-white">
-        Work
-      </div>
-      <ul class="flex flex-col space-y-4">
-        { 
-          work.map(entry => (
-            <li class="animate">
-              <div class="text-sm opacity-75">
-                {dateRange(entry.data.dateStart, entry.data.dateEnd)}
-              </div>
-              <div class="font-semibold text-black dark:text-white">
-                {entry.data.company}
-              </div>
-              <div class="text-sm opacity-75">
-                {entry.data.role}
-              </div>
-              <article>
-                <entry.Content />
-              </article>
-            </li>
-          ))
-        }
-      </ul>
-<!-- 
-      <ul class="animate flex flex-col gap-4">
-
-      </ul> -->
+    <!-- Hero -->
+    <div class="animate space-y-3 pb-10 border-b border-border">
+      <Eyebrow>WORK · {startYear}—{endYear}</Eyebrow>
+      <h1 class="font-display font-medium text-4xl md:text-6xl leading-[1.04] tracking-[-0.03em] text-fg-1">
+        Where I've shipped.
+      </h1>
     </div>
+
+    <!-- Work entries -->
+    <ul class="divide-y divide-border">
+      {work.map(entry => (
+        <li class="animate py-8">
+          <div class="flex flex-wrap gap-x-4 gap-y-1 items-baseline mb-4">
+            <span class="font-mono text-xs uppercase tracking-[0.1em] text-fg-3">
+              {dateRange(entry.data.dateStart, entry.data.dateEnd)}
+            </span>
+            <span class="font-display font-semibold text-xl text-fg-1">
+              {entry.data.company}
+            </span>
+            <span class="font-sans text-sm text-fg-2">
+              {entry.data.role}
+            </span>
+          </div>
+          <article class="lumen-prose">
+            <entry.Content />
+          </article>
+        </li>
+      ))}
+    </ul>
   </Container>
 </PageLayout>

@@ -1,0 +1,30 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css"><style>
+.group { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.l-tile { width: 48px; height: 48px; border-radius: 14px; display:flex; align-items:center; justify-content:center; font-family: var(--font-display); font-weight: 600; font-size: 28px; line-height: 1; letter-spacing: -0.04em; }
+.v1 { background: var(--lumen-ink); color: var(--lumen-mist); position: relative; }
+.v1 .dot { position: absolute; width: 5px; height: 5px; border-radius: 999px; background: var(--lumen-ember); top: 10px; right: 10px; }
+.v2 { background: transparent; color: var(--lumen-ink); border: 1.5px solid var(--lumen-ink); }
+.v3 { background: var(--lumen-mist); color: var(--lumen-ink); box-shadow: inset 0 0 0 1px var(--border); }
+.v4 { background: var(--lumen-ember); color: var(--lumen-ink); }
+.wordmark { font-family: var(--font-display); font-weight: 500; font-size: 30px; color: var(--fg-1); letter-spacing: -0.03em; display: inline-flex; align-items: baseline; gap: 0; }
+.wordmark .gap { width: 10px; }
+.wordmark .spark { width: 5px; height: 5px; border-radius: 999px; background: var(--lumen-ember); margin-left: 6px; align-self: center; }
+.lockup { display:flex; align-items:center; gap:12px; padding-top: 14px; border-top: 1px solid var(--border); margin-top: 14px; }
+.lockup .mini { width: 32px; height: 32px; border-radius: 8px; background: var(--lumen-ink); color: var(--lumen-mist); display:flex; align-items:center; justify-content:center; font-family: var(--font-display); font-weight: 600; font-size: 18px; letter-spacing: -0.03em; position: relative; }
+.lockup .mini .dot { position: absolute; width: 3px; height: 3px; border-radius: 999px; background: var(--lumen-ember); top: 6px; right: 6px; }
+.lockup .name { font-family: var(--font-display); font-weight: 500; font-size: 17px; color: var(--fg-1); letter-spacing: -0.02em; }
+.note { font-family: var(--font-mono); font-size: 10px; color: var(--fg-3); margin-top: 14px; }
+</style></head><body><div class="card">
+<div class="group">
+  <div class="l-tile v1">m<span class="dot"></span></div>
+  <div class="l-tile v2">m</div>
+  <div class="l-tile v3">m</div>
+  <div class="l-tile v4">m</div>
+  <div class="wordmark">minh<span class="gap"></span>pham<span class="spark"></span></div>
+</div>
+<div class="lockup">
+  <div class="mini">m<span class="dot"></span></div>
+  <div class="name">minh pham</div>
+</div>
+<div class="note">Monogram: lowercase 'm', Clash Display 500. Ember dot = the "lumen" — a small glow in the dark square. Used on a system called Lumen.</div>
+</div></body></html>

@@ -1,0 +1,12 @@
+---
+interface Props {
+  pulse?: boolean;
+}
+
+const { pulse = false } = Astro.props;
+---
+
+<div class="font-sans font-medium text-xs uppercase tracking-[0.12em] text-fg-3 inline-flex items-center gap-2.5">
+  {pulse && <span class="lumen-pulse" aria-hidden="true"/>}
+  <slot/>
+</div>

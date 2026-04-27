@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" width="640" height="400">
+  <defs>
+    <radialGradient id="wash" cx="30%" cy="30%" r="80%">
+      <stop offset="0" stop-color="#D6E3F0"></stop>
+      <stop offset="1" stop-color="#F4F7FB"></stop>
+    </radialGradient>
+  </defs>
+  <rect width="640" height="400" fill="url(#wash)" rx="18"></rect>
+  <text x="320" y="205" text-anchor="middle" font-family="&#39;JetBrains Mono&#39;, monospace" font-size="12" fill="#5F6A7D">landscape placeholder 16:10</text>
+</svg>

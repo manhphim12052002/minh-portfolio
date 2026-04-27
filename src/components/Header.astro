@@ -1,34 +1,69 @@
 ---
 import Container from "@components/Container.astro";
-import Link from "@components/Link.astro";
-import { SITE } from "@consts";
+
+const pathname = Astro.url.pathname;
+
+type NavItem = { label: string; href: string; active: boolean };
+
+const navItems: NavItem[] = [
+  {
+    label: "writing",
+    href: "/writing",
+    active: pathname === "/writing" || pathname.startsWith("/writing/"),
+  },
+  {
+    label: "work",
+    href: "/work",
+    active: pathname === "/work" || pathname.startsWith("/work/"),
+  },
+  {
+    label: "projects",
+    href: "/projects",
+    active: pathname === "/projects" || pathname.startsWith("/projects/"),
+  },
+  {
+    label: "about",
+    href: "/about",
+    active: pathname === "/about" || pathname.startsWith("/about/"),
+  },
+];
 ---
 
-<header>
+<!--
+  Sticky glass nav. Background + scrolled divider handled in global.css
+  via #site-header rules (single --bg-glass token, dark scope overrides).
+-->
+<header
+  class="sticky top-0 z-50 backdrop-blur-md border-b border-transparent transition-colors duration-[220ms] ease-out"
+  id="site-header"
+>
   <Container>
-    <div class="flex flex-wrap gap-y-2 justify-between">
-      <Link href="/" underline={false}>
-        <div class="font-semibold">
-          {SITE.NAME}
-        </div>
-      </Link>
-      <nav class="flex gap-1">
-        <Link href="/blog">
-          blog
-        </Link>
-        <span>
-          {`/`}
-        </span>
-        <Link href="/work">
-          work
-        </Link>
-        <span>
-          {`/`}
-        </span>
-        <Link href="/projects">
-          projects
-        </Link>
+    <div class="flex items-center h-16 gap-5">
+
+      <!-- Brand: tile mark + wordmark -->
+      <a
+        href="/"
+        class="flex items-center gap-2.5 font-display font-medium text-[17px] tracking-tight text-[var(--lumen-ink)] dark:text-[var(--lumen-mist)] no-underline"
+        aria-label="minh — home"
+      >
+        <span class="brand-tile" aria-hidden="true">m</span>
+        <span>minh</span>
+      </a>
+
+      <!-- Nav links -->
+      <nav class="flex items-center gap-1.5 ml-auto" aria-label="Primary navigation">
+        {navItems.map((item) => (
+          <a
+            href={item.href}
+            class={`nav-link${item.active ? " active" : ""}`}
+            aria-current={item.active ? "page" : undefined}
+          >
+            {item.label}
+          </a>
+        ))}
       </nav>
+
     </div>
   </Container>
 </header>
+

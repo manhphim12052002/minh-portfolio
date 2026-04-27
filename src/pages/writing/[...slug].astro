@@ -1,0 +1,52 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+import PageLayout from "@layouts/PageLayout.astro";
+import Container from "@components/Container.astro";
+import FormattedDate from "@components/FormattedDate.astro";
+import BackToPrev from "@components/BackToPrev.astro";
+import Eyebrow from "@components/Eyebrow.astro";
+import { readingTime } from "@lib/utils";
+
+export async function getStaticPaths() {
+  const posts = (await getCollection("writing"))
+    .filter((post) => !post.data.draft)
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: post,
+  }));
+}
+type Props = CollectionEntry<"writing">;
+
+const post = Astro.props;
+const { Content } = await post.render();
+---
+
+<PageLayout title={post.data.title} description={post.data.description}>
+  <Container width="prose">
+    <div class="animate">
+      <BackToPrev href="/writing">Back to writing</BackToPrev>
+    </div>
+
+    <div class="my-10 space-y-3 animate">
+      <Eyebrow>
+        <FormattedDate date={post.data.date} /> · {readingTime(post.body)} · ESSAY
+      </Eyebrow>
+      <h1 class="font-display font-medium text-4xl md:text-5xl leading-[1.04] tracking-[-0.035em] text-fg-1 text-balance">
+        {post.data.title}
+      </h1>
+      {post.data.description && (
+        <p class="lumen-lead">{post.data.description}</p>
+      )}
+    </div>
+
+    <article class="animate prose prose-lumen dark:prose-invert max-w-none">
+      <Content />
+    </article>
+
+    <div class="mt-14 pt-8 border-t border-border flex items-center gap-3.5 animate">
+      <span class="w-1.5 h-1.5 rounded-full bg-ember" aria-hidden="true"></span>
+      <span class="font-display font-medium text-sm text-fg-2 tracking-tight">— minh</span>
+    </div>
+  </Container>
+</PageLayout>

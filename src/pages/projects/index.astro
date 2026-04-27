@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import PageLayout from "@layouts/PageLayout.astro";
 import Container from "@components/Container.astro";
 import ArrowCard from "@components/ArrowCard.astro";
+import Eyebrow from "@components/Eyebrow.astro";
 import { PROJECTS } from "@consts";
 
 const projects = (await getCollection("projects"))
@@ -12,19 +13,21 @@ const projects = (await getCollection("projects"))
 
 <PageLayout title={PROJECTS.TITLE} description={PROJECTS.DESCRIPTION}>
   <Container>
-    <div class="space-y-10">
-      <div class="animate font-semibold text-black dark:text-white">
-        Projects
-      </div>
-      <ul class="animate flex flex-col gap-4">
-        {
-          projects.map((project) => (
-            <li>
-              <ArrowCard entry={project}/>
-            </li>
-          ))
-        }
-      </ul>
+    <!-- Hero -->
+    <div class="animate space-y-3 pb-10 border-b border-border">
+      <Eyebrow>PROJECTS · {projects.length}</Eyebrow>
+      <h1 class="font-display font-medium text-4xl md:text-6xl leading-[1.04] tracking-[-0.03em] text-fg-1">
+        Small things I've built on the side.
+      </h1>
     </div>
+
+    <!-- Project grid -->
+    <ul class="animate grid grid-cols-1 md:grid-cols-2 gap-5 pt-10">
+      {projects.map((project) => (
+        <li>
+          <ArrowCard entry={project} />
+        </li>
+      ))}
+    </ul>
   </Container>
 </PageLayout>

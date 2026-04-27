@@ -10,22 +10,22 @@ export const SITE: Site = {
 
 export const HOME: Metadata = {
   TITLE: "Home",
-  DESCRIPTION: "Minh Pham's personal website.",
+  DESCRIPTION: "Minh Pham — building quiet software, one careful detail at a time.",
 };
 
 export const BLOG: Metadata = {
-  TITLE: "Blog",
-  DESCRIPTION: "A collection of articles on topics I am passionate about.",
+  TITLE: "Writing",
+  DESCRIPTION: "Notes, essays, and the occasional talk.",
 };
 
 export const WORK: Metadata = {
   TITLE: "Work",
-  DESCRIPTION: "Where I have worked and what I have done.",
+  DESCRIPTION: "Where I've shipped, and what I learned doing it.",
 };
 
 export const PROJECTS: Metadata = {
   TITLE: "Projects",
-  DESCRIPTION: "A collection of my projects, with links to repositories and demos.",
+  DESCRIPTION: "Small things I've built on the side.",
 };
 
 export const SOCIALS: Socials = [

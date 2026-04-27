@@ -1,0 +1,19 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css"><style>
+.swatches { display: grid; grid-template-columns: repeat(8, 1fr); gap: 8px; }
+.sw { aspect-ratio: 1 / 1.15; border-radius: 10px; padding: 8px; display: flex; flex-direction: column; justify-content: flex-end; position: relative; box-shadow: inset 0 0 0 1px rgba(30,58,95,0.04); }
+.sw .h { font-family: var(--font-mono); font-size: 9px; line-height: 1; opacity: 0.85; }
+.sw .n { font-family: var(--font-sans); font-size: 11px; font-weight: 500; line-height: 1.1; margin-top: 2px; }
+.sw.dark .h, .sw.dark .n { color: #E6EDF7; }
+.sw.light .h, .sw.light .n { color: #1E3A5F; }
+</style></head><body><div class="card">
+<div class="swatches">
+  <div class="sw light" style="background:#F4F7FB"><div class="n">Mist</div><div class="h">F4F7FB</div></div>
+  <div class="sw light" style="background:#E6EEF7"><div class="n">Cloud</div><div class="h">E6EEF7</div></div>
+  <div class="sw light" style="background:#D6E3F0"><div class="n">Sky</div><div class="h">D6E3F0</div></div>
+  <div class="sw light" style="background:#AEC9E8"><div class="n">Horizon</div><div class="h">AEC9E8</div></div>
+  <div class="sw dark" style="background:#7FA8D4"><div class="n">Azure</div><div class="h">7FA8D4</div></div>
+  <div class="sw dark" style="background:#4A7AB8"><div class="n">Deep</div><div class="h">4A7AB8</div></div>
+  <div class="sw dark" style="background:#1E3A5F"><div class="n">Ink</div><div class="h">1E3A5F</div></div>
+  <div class="sw dark" style="background:#0F2038"><div class="n">Night</div><div class="h">0F2038</div></div>
+</div>
+</div></body></html>

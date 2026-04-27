@@ -1,0 +1,19 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css"><style>
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.sem { padding: 14px; border-radius: 10px; display: flex; align-items: center; gap: 10px; font-family: var(--font-sans); font-size: 13px; font-weight: 500; }
+.dot { width: 10px; height: 10px; border-radius: 999px; }
+.success { background: rgba(91,143,122,0.10); color: #3D6851; }
+.success .dot { background: #5B8F7A; }
+.warning { background: rgba(201,160,92,0.12); color: #7A5E2E; }
+.warning .dot { background: #C9A05C; }
+.danger { background: rgba(181,106,106,0.12); color: #7E4040; }
+.danger .dot { background: #B56A6A; }
+.note { margin-top: 12px; font-family: var(--font-sans); font-size: 11px; color: var(--fg-3); font-style: italic; }
+</style></head><body><div class="card">
+<div class="grid">
+  <div class="sem success"><div class="dot"></div>Saved ·  #5B8F7A</div>
+  <div class="sem warning"><div class="dot"></div>Check this ·  #C9A05C</div>
+  <div class="sem danger"><div class="dot"></div>Delete ·  #B56A6A</div>
+</div>
+<div class="note">Muted, not clinical. System greens/yellows/reds are avoided — semantic colors here are dusty, hand-picked to sit next to the blues.</div>
+</div></body></html>
