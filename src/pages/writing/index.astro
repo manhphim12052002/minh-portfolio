@@ -43,7 +43,7 @@ const years = Object.keys(posts).sort((a, b) => parseInt(b) - parseInt(a));
           <div class="font-mono text-xs text-fg-3 tracking-wide pt-8 pb-2">— {year}</div>
           {posts[year].map((post) => (
             <a
-              href={`/writing/${post.slug}`}
+              href={`/writing/${post.id}`}
               class="grid grid-cols-[80px_1fr_auto] gap-5 py-4 border-t border-border items-baseline group hover:pl-2.5 transition-[padding] duration-[220ms] ease-out"
             >
               <FormattedDate date={post.data.date} />

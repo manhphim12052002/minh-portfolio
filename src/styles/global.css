@@ -1,4 +1,13 @@
 /* =========================================================================
+   Tailwind v4 entry — CSS-first config replaces tailwind.config.mjs
+   ========================================================================= */
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/* Preserve existing `html.dark` toggle (Astro Nano theme switch) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* =========================================================================
    Satoshi — self-hosted (brand font)
    ========================================================================= */
 @font-face { font-family: 'Satoshi'; src: url('/fonts/Satoshi-Light.otf') format('opentype'); font-weight: 300; font-style: normal; font-display: swap; }
@@ -167,9 +176,88 @@ html.dark,
   --link-underline: rgba(174, 201, 232, 0.22);
 }
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* =========================================================================
+   Tailwind v4 theme mapping — exposes Lumen tokens as utility classes
+   `inline` resolves var() at compile, so dark-mode CSS-var swaps keep working
+   on utilities like bg-bg-base, text-fg-1, font-display, etc.
+   ========================================================================= */
+@theme inline {
+  /* ---- Lumen palette ---- */
+  --color-mist:           var(--lumen-mist);
+  --color-cloud:          var(--lumen-cloud);
+  --color-sky:            var(--lumen-sky);
+  --color-horizon:        var(--lumen-horizon);
+  --color-azure:          var(--lumen-azure);
+  --color-deep:           var(--lumen-deep);
+  --color-ink:            var(--lumen-ink);
+  --color-night:          var(--lumen-night);
+  --color-ember:          var(--lumen-ember);
+  --color-ember-soft:     var(--lumen-ember-soft);
+  --color-paper:          var(--lumen-paper);
+  --color-white:          var(--lumen-white);
+  --color-stone-50:       var(--lumen-stone-50);
+  --color-stone-100:      var(--lumen-stone-100);
+  --color-stone-200:      var(--lumen-stone-200);
+  --color-stone-300:      var(--lumen-stone-300);
+  --color-stone-400:      var(--lumen-stone-400);
+  --color-stone-500:      var(--lumen-stone-500);
+  --color-stone-600:      var(--lumen-stone-600);
+  --color-stone-700:      var(--lumen-stone-700);
+  --color-stone-800:      var(--lumen-stone-800);
+  --color-stone-900:      var(--lumen-stone-900);
+
+  /* ---- Semantic tokens ---- */
+  --color-accent:         var(--accent);
+  --color-accent-soft:    var(--accent-soft);
+  --color-accent-hover:   var(--accent-hover);
+  --color-accent-fg:      var(--accent-fg);
+  --color-warm:           var(--warm);
+  --color-warm-soft:      var(--warm-soft);
+  --color-fg-1:           var(--fg-1);
+  --color-fg-2:           var(--fg-2);
+  --color-fg-3:           var(--fg-3);
+  --color-fg-4:           var(--fg-4);
+  --color-bg-base:        var(--bg);
+  --color-bg-raised:      var(--bg-raised);
+  --color-bg-sunken:      var(--bg-sunken);
+  --color-surface:        var(--surface);
+  --color-surface-soft:   var(--surface-soft);
+  --color-border:         var(--border);
+  --color-border-strong:  var(--border-strong);
+  --color-divider:        var(--divider);
+  --color-success:        var(--success);
+  --color-warning:        var(--warning);
+  --color-danger:         var(--danger);
+
+  /* ---- Type families ---- */
+  --font-sans:    var(--font-sans);
+  --font-display: var(--font-display);
+  --font-serif:   var(--font-display);
+  --font-mono:    var(--font-mono);
+
+  /* ---- Radii ---- */
+  --radius-xs:   4px;
+  --radius-sm:   8px;
+  --radius-md:   12px;
+  --radius-lg:   18px;
+  --radius-xl:   28px;
+  --radius-full: 999px;
+
+  /* ---- Shadows ---- */
+  --shadow-xs:    var(--shadow-xs);
+  --shadow-sm:    var(--shadow-sm);
+  --shadow-md:    var(--shadow-md);
+  --shadow-lg:    var(--shadow-lg);
+  --shadow-inset: var(--shadow-inset);
+  --shadow-glow:  var(--glow-accent);
+
+  /* ---- Motion ---- */
+  --duration-fast: 140ms;
+  --duration-base: 220ms;
+  --duration-slow: 420ms;
+  --ease-out:    cubic-bezier(.2,.8,.2,1);
+  --ease-spring: cubic-bezier(.34,1.56,.64,1);
+}
 
 html {
   overflow-y: scroll;
