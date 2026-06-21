@@ -1,0 +1,8 @@
+# Cloudflare Pages — HTTP response headers (copied to dist/_headers at build).
+# Advertise agent resources via RFC 8288 Link headers. Only verified, existing
+# targets are listed (llms.txt, sitemap, RSS) — a dead Link is worse than none.
+# Vary: Accept on every response so caches never serve HTML to a later
+# `Accept: text/markdown` request (negotiation cache-poisoning guard).
+/*
+  Link: </llms.txt>; rel="llms-txt"; type="text/plain", </sitemap-index.xml>; rel="sitemap"; type="application/xml", </rss.xml>; rel="alternate"; type="application/rss+xml"
+  Vary: Accept
