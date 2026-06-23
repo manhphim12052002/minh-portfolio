@@ -1,0 +1,60 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+import PageLayout from "@layouts/PageLayout.astro";
+import Container from "@components/Container.astro";
+import Eyebrow from "@components/Eyebrow.astro";
+import FormattedDate from "@components/FormattedDate.astro";
+import { NOTES } from "@consts";
+
+const data = (await getCollection("notes"))
+  .filter(note => !note.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+type Acc = {
+  [year: string]: CollectionEntry<"notes">[];
+}
+
+const notes = data.reduce((acc: Acc, note) => {
+  const year = note.data.date.getFullYear().toString();
+  if (!acc[year]) {
+    acc[year] = [];
+  }
+  acc[year].push(note);
+  return acc;
+}, {});
+
+const years = Object.keys(notes).sort((a, b) => parseInt(b) - parseInt(a));
+---
+
+<PageLayout title={NOTES.TITLE} description={NOTES.DESCRIPTION}>
+  <Container>
+    <div class="animate space-y-3 pb-10 border-b border-border">
+      <Eyebrow>NOTES · {data.length}</Eyebrow>
+      <h1 class="font-display font-medium text-4xl md:text-6xl leading-[1.04] tracking-[-0.03em] text-fg-1">
+        Short notes from what I'm learning in public.
+      </h1>
+    </div>
+
+    <div class="space-y-2 pt-4">
+      {years.map(year => (
+        <section class="animate">
+          <div class="font-mono text-xs text-fg-3 tracking-wide pt-8 pb-2">— {year}</div>
+          {notes[year].map((note) => (
+            <a
+              href={`/notes/${note.id}`}
+              class="grid grid-cols-[80px_1fr_auto] gap-5 py-4 border-t border-border items-baseline group hover:pl-2.5 transition-[padding] duration-[220ms] ease-out"
+            >
+              <FormattedDate date={note.data.date} />
+              <div class="font-sans font-semibold text-fg-1 text-base leading-snug tracking-tight group-hover:text-deep transition-colors duration-[220ms]">
+                {note.data.title}
+              </div>
+              <span class="font-sans text-[10px] font-medium uppercase tracking-[0.1em] text-fg-3 px-2 py-1 rounded bg-surface-soft">
+                NOTE
+              </span>
+            </a>
+          ))}
+        </section>
+      ))}
+    </div>
+  </Container>
+</PageLayout>

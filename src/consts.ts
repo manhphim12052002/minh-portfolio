@@ -4,6 +4,7 @@ export const SITE: Site = {
   NAME: "Minh Pham",
   EMAIL: "ngocminhpham@gmail.com",
   NUM_POSTS_ON_HOMEPAGE: 3,
+  NUM_NOTES_ON_HOMEPAGE: 5,
   NUM_WORKS_ON_HOMEPAGE: 2,
   NUM_PROJECTS_ON_HOMEPAGE: 1,
 };
@@ -15,7 +16,22 @@ export const HOME: Metadata = {
 
 export const BLOG: Metadata = {
   TITLE: "Writing",
-  DESCRIPTION: "Notes, essays, and the occasional talk.",
+  DESCRIPTION: "Long-form essays on software, systems, and product work.",
+};
+
+export const NOTES: Metadata = {
+  TITLE: "Notes",
+  DESCRIPTION: "Short notes from what I'm learning in public.",
+};
+
+export const READING: Metadata = {
+  TITLE: "Reading",
+  DESCRIPTION: "Books, papers, and references I'm working through.",
+};
+
+export const NOW: Metadata = {
+  TITLE: "Now",
+  DESCRIPTION: "What I'm focused on right now.",
 };
 
 export const WORK: Metadata = {

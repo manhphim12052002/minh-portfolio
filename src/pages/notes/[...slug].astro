@@ -1,0 +1,46 @@
+---
+import { type CollectionEntry, getCollection, render } from "astro:content";
+import PageLayout from "@layouts/PageLayout.astro";
+import Container from "@components/Container.astro";
+import FormattedDate from "@components/FormattedDate.astro";
+import BackToPrev from "@components/BackToPrev.astro";
+import Eyebrow from "@components/Eyebrow.astro";
+import { readingTime } from "@lib/utils";
+
+export async function getStaticPaths() {
+  const notes = (await getCollection("notes"))
+    .filter((note) => !note.data.draft)
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  return notes.map((note) => ({
+    params: { slug: note.id },
+    props: note,
+  }));
+}
+
+type Props = CollectionEntry<"notes">;
+
+const note = Astro.props;
+const { Content } = await render(note);
+---
+
+<PageLayout title={note.data.title} description={note.data.description}>
+  <Container width="prose">
+    <div class="animate">
+      <BackToPrev href="/notes">Back to notes</BackToPrev>
+    </div>
+
+    <div class="my-10 space-y-3 animate">
+      <Eyebrow>
+        <FormattedDate date={note.data.date} /> · {readingTime(note.body)} · NOTE
+      </Eyebrow>
+      <h1 class="font-display font-medium text-4xl md:text-5xl leading-[1.04] tracking-[-0.035em] text-fg-1 text-balance">
+        {note.data.title}
+      </h1>
+      <p class="lumen-lead">{note.data.description}</p>
+    </div>
+
+    <article class="animate prose prose-lumen dark:prose-invert max-w-none">
+      <Content />
+    </article>
+  </Container>
+</PageLayout>

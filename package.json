@@ -9,6 +9,7 @@
     "preview": "astro preview",
     "preview:network": "astro preview --host",
     "astro": "astro",
+    "test": "node scripts/verify-content-strategy.mjs",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix"
   },

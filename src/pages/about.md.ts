@@ -6,12 +6,15 @@ const md = `# Hi, I'm Minh.
 
 > A few words about who I am and what I'm thinking about.
 
-I spend my days building software at TomTom, my evenings co-founding
-[LECOLE](https://lecole.com), and the spaces in between trying to design tools
-that respect the people who use them.
+Engineer at TomTom in Amsterdam. Writing about distributed systems, what I'm
+learning along the way, and the life around the work.
 
-This site is where I think out loud — about software, learning, and the strange
-business of making digital things feel calmer.
+This site is my public workbench: long-form essays when an idea has settled,
+short notes while I am still figuring it out, reading logs for the technical
+backbone, and occasional life texture from Amsterdam.
+
+The thread through it all is technical growth: how backend systems scale, how
+engineering judgment forms, and what remains human around the work.
 `;
 
 export const GET: APIRoute = () => {

@@ -1,0 +1,51 @@
+---
+import { type CollectionEntry, getCollection, render } from "astro:content";
+import PageLayout from "@layouts/PageLayout.astro";
+import Container from "@components/Container.astro";
+import BackToPrev from "@components/BackToPrev.astro";
+import Eyebrow from "@components/Eyebrow.astro";
+import FormattedDate from "@components/FormattedDate.astro";
+import { readingTime } from "@lib/utils";
+
+export async function getStaticPaths() {
+  const reading = (await getCollection("reading"))
+    .filter((entry) => !entry.data.draft)
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  return reading.map((entry) => ({
+    params: { slug: entry.id },
+    props: entry,
+  }));
+}
+
+type Props = CollectionEntry<"reading">;
+
+const entry = Astro.props;
+const { Content } = await render(entry);
+---
+
+<PageLayout title={entry.data.title} description={entry.data.description}>
+  <Container width="prose">
+    <div class="animate">
+      <BackToPrev href="/reading">Back to reading</BackToPrev>
+    </div>
+
+    <div class="my-10 space-y-3 animate">
+      <Eyebrow>
+        <FormattedDate date={entry.data.date} /> · {readingTime(entry.body)} · READING
+      </Eyebrow>
+      <h1 class="font-display font-medium text-4xl md:text-5xl leading-[1.04] tracking-[-0.035em] text-fg-1 text-balance">
+        {entry.data.title}
+      </h1>
+      <p class="lumen-lead">{entry.data.description}</p>
+      {entry.data.sourceURL && (
+        <a href={entry.data.sourceURL} class="lumen-underline font-sans text-sm text-fg-2" target="_blank" rel="noreferrer">
+          Source
+        </a>
+      )}
+    </div>
+
+    <article class="animate prose prose-lumen dark:prose-invert max-w-none">
+      <Content />
+    </article>
+  </Container>
+</PageLayout>

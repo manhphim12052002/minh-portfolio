@@ -1,0 +1,31 @@
+---
+import { getCollection, render } from "astro:content";
+import PageLayout from "@layouts/PageLayout.astro";
+import Container from "@components/Container.astro";
+import Eyebrow from "@components/Eyebrow.astro";
+import FormattedDate from "@components/FormattedDate.astro";
+import { NOW } from "@consts";
+
+const entries = (await getCollection("now"))
+  .filter(entry => !entry.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const latest = entries[0];
+const { Content } = latest ? await render(latest) : { Content: undefined };
+---
+
+<PageLayout title={NOW.TITLE} description={NOW.DESCRIPTION}>
+  <Container width="prose">
+    <div class="animate space-y-3 pb-10 border-b border-border">
+      <Eyebrow>NOW{latest && <> · <FormattedDate date={latest.data.date} /></>}</Eyebrow>
+      <h1 class="font-display font-medium text-4xl md:text-6xl leading-[1.04] tracking-[-0.03em] text-fg-1">
+        What I'm focused on right now.
+      </h1>
+      {latest && <p class="lumen-lead">{latest.data.description}</p>}
+    </div>
+
+    <article class="animate prose prose-lumen dark:prose-invert max-w-none pt-10">
+      {Content ? <Content /> : <p>No current update yet.</p>}
+    </article>
+  </Container>
+</PageLayout>

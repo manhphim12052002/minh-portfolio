@@ -1,0 +1,49 @@
+---
+import { getCollection } from "astro:content";
+import PageLayout from "@layouts/PageLayout.astro";
+import Container from "@components/Container.astro";
+import Eyebrow from "@components/Eyebrow.astro";
+import FormattedDate from "@components/FormattedDate.astro";
+import { READING } from "@consts";
+
+const reading = (await getCollection("reading"))
+  .filter(entry => !entry.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<PageLayout title={READING.TITLE} description={READING.DESCRIPTION}>
+  <Container>
+    <div class="animate space-y-3 pb-10 border-b border-border">
+      <Eyebrow>READING · {reading.length}</Eyebrow>
+      <h1 class="font-display font-medium text-4xl md:text-6xl leading-[1.04] tracking-[-0.03em] text-fg-1">
+        Books, papers, and references I'm working through.
+      </h1>
+    </div>
+
+    <ul class="animate divide-y divide-border pt-4">
+      {reading.map(entry => (
+        <li>
+          <a
+            href={`/reading/${entry.id}`}
+            class="grid grid-cols-[80px_1fr] gap-5 py-6 group hover:pl-2.5 transition-[padding] duration-[220ms] ease-out"
+          >
+            <FormattedDate date={entry.data.date} />
+            <div>
+              <div class="font-sans font-semibold text-fg-1 text-base leading-snug tracking-tight group-hover:text-deep transition-colors duration-[220ms]">
+                {entry.data.title}
+              </div>
+              {entry.data.author && (
+                <div class="font-mono text-xs uppercase tracking-[0.1em] text-fg-3 mt-2">
+                  {entry.data.author}
+                </div>
+              )}
+              <p class="font-sans text-sm text-fg-2 leading-relaxed mt-2">
+                {entry.data.description}
+              </p>
+            </div>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </Container>
+</PageLayout>

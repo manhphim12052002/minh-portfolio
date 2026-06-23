@@ -14,6 +14,21 @@ export const GET: APIRoute = async () => {
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
     .slice(0, SITE.NUM_POSTS_ON_HOMEPAGE);
 
+  const notes = (await getCollection("notes"))
+    .filter((p) => !p.data.draft)
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+    .slice(0, SITE.NUM_NOTES_ON_HOMEPAGE);
+
+  const reading = (await getCollection("reading"))
+    .filter((p) => !p.data.draft)
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+    .slice(0, 1);
+
+  const now = (await getCollection("now"))
+    .filter((p) => !p.data.draft)
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+    .slice(0, 1);
+
   const projects = (await getCollection("projects"))
     .filter((p) => !p.data.draft)
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
@@ -26,14 +41,35 @@ export const GET: APIRoute = async () => {
   const sections: string[] = [
     `# ${SITE.NAME}`,
     `> ${HOME.DESCRIPTION}`,
-    "I'm Minh — a software engineer at TomTom and co-founder of LECOLE. " +
-      "I write about what I build and what it teaches me.",
+    "Engineer at TomTom in Amsterdam. Writing about distributed systems, " +
+      "what I'm learning along the way, and the life around the work.",
   ];
 
   sections.push(
     "## Recent writing\n" +
       writing
         .map((p) => `- [${p.data.title}](${abs(`/writing/${p.id}.md`)}): ${p.data.description}`)
+        .join("\n"),
+  );
+
+  sections.push(
+    "## Recent notes\n" +
+      notes
+        .map((p) => `- [${p.data.title}](${abs(`/notes/${p.id}.md`)}): ${p.data.description}`)
+        .join("\n"),
+  );
+
+  sections.push(
+    "## Now\n" +
+      (now[0]
+        ? `- [${now[0].data.title}](${abs("/now.md")}): ${now[0].data.description}`
+        : "- No current update yet."),
+  );
+
+  sections.push(
+    "## Reading\n" +
+      reading
+        .map((p) => `- [${p.data.title}](${abs(`/reading/${p.id}.md`)}): ${p.data.description}`)
         .join("\n"),
   );
 
@@ -49,10 +85,12 @@ export const GET: APIRoute = async () => {
   );
 
   sections.push(
-    "## Projects\n" +
-      projects
-        .map((p) => `- [${p.data.title}](${abs(`/projects/${p.id}.md`)}): ${p.data.description}`)
-        .join("\n"),
+    projects.length
+      ? "## Projects\n" +
+          projects
+            .map((p) => `- [${p.data.title}](${abs(`/projects/${p.id}.md`)}): ${p.data.description}`)
+            .join("\n")
+      : "## Projects\nPublic side projects will show up here when they have something real to say.",
   );
 
   sections.push(`See also: [llms.txt](${abs("/llms.txt")}) · [About](${abs("/about.md")})`);

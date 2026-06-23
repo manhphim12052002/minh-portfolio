@@ -8,7 +8,7 @@ static content site on **Cloudflare Pages**. Production domain: `https://manhphi
 | Feature | Where | Notes |
 |---|---|---|
 | **Content Signals** | `src/pages/robots.txt.ts` | `Content-Signal: search=yes, ai-input=yes, ai-train=no` — allow search + AI citation, block AI training. |
-| **Markdown twins** | `src/pages/**/[...slug].md.ts`, `index.md.ts`, `about.md.ts` | Every entry + homepage/about reachable as `<path>.md` (raw markdown, `text/markdown`). |
+| **Markdown twins** | `src/pages/**/[...slug].md.ts`, `index.md.ts`, `about.md.ts`, `notes.md.ts`, `reading.md.ts`, `now.md.ts` | Every entry + key top-level surface reachable as `<path>.md` (raw markdown, `text/markdown`). |
 | **llms.txt** | `src/pages/llms.txt.ts` | llmstxt.org index linking to the `.md` twins (absolute URLs). Served as `text/plain`. |
 | **Markdown negotiation** | `functions/_middleware.js` | `Accept: text/markdown` on an HTML URL → serves the `.md` twin at the same URL, `Vary: Accept`. Fail-open. |
 | **Link headers** | `public/_headers` | RFC 8288 `Link` to `llms.txt` (rel=llms-txt), sitemap, RSS. |
@@ -17,6 +17,11 @@ static content site on **Cloudflare Pages**. Production domain: `https://manhphi
 - `/` → `/index.md`
 - `/about` → `/about.md`  *(route file `about.md.ts`, not `about/index.md` — keeps middleware mapping trivial)*
 - `/writing/<slug>` → `/writing/<slug>.md`
+- `/notes` → `/notes.md`
+- `/notes/<slug>` → `/notes/<slug>.md`
+- `/reading` → `/reading.md`
+- `/reading/<slug>` → `/reading/<slug>.md`
+- `/now` → `/now.md`
 - `/projects/<slug>` → `/projects/<slug>.md`
 - `/work/<slug>` → `/work/<slug>.md`
 

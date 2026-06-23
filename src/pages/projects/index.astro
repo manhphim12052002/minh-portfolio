@@ -22,12 +22,18 @@ const projects = (await getCollection("projects"))
     </div>
 
     <!-- Project grid -->
-    <ul class="animate grid grid-cols-1 md:grid-cols-2 gap-5 pt-10">
-      {projects.map((project) => (
-        <li>
-          <ArrowCard entry={project} />
-        </li>
-      ))}
-    </ul>
+    {projects.length ? (
+      <ul class="animate grid grid-cols-1 md:grid-cols-2 gap-5 pt-10">
+        {projects.map((project) => (
+          <li>
+            <ArrowCard entry={project} />
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p class="animate font-sans text-base text-fg-2 leading-relaxed pt-10 max-w-prose">
+        Public side projects will show up here when they have something real to say.
+      </p>
+    )}
   </Container>
 </PageLayout>

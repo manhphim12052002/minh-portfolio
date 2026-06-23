@@ -12,6 +12,21 @@ const navItems: NavItem[] = [
     active: pathname === "/writing" || pathname.startsWith("/writing/"),
   },
   {
+    label: "notes",
+    href: "/notes",
+    active: pathname === "/notes" || pathname.startsWith("/notes/"),
+  },
+  {
+    label: "reading",
+    href: "/reading",
+    active: pathname === "/reading" || pathname.startsWith("/reading/"),
+  },
+  {
+    label: "now",
+    href: "/now",
+    active: pathname === "/now" || pathname.startsWith("/now/"),
+  },
+  {
     label: "work",
     href: "/work",
     active: pathname === "/work" || pathname.startsWith("/work/"),
@@ -51,7 +66,7 @@ const navItems: NavItem[] = [
       </a>
 
       <!-- Nav links -->
-      <nav class="flex items-center gap-1.5 ml-auto" aria-label="Primary navigation">
+      <nav class="flex items-center gap-1.5 ml-auto overflow-x-auto whitespace-nowrap -mr-6 pr-6 md:mr-0 md:pr-0" aria-label="Primary navigation">
         {navItems.map((item) => (
           <a
             href={item.href}
@@ -66,4 +81,3 @@ const navItems: NavItem[] = [
     </div>
   </Container>
 </header>
-

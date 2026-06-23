@@ -14,6 +14,18 @@ export const GET: APIRoute = async () => {
     .filter((p) => !p.data.draft)
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
+  const notes = (await getCollection("notes"))
+    .filter((p) => !p.data.draft)
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+  const reading = (await getCollection("reading"))
+    .filter((p) => !p.data.draft)
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+  const now = (await getCollection("now"))
+    .filter((p) => !p.data.draft)
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
   const projects = (await getCollection("projects"))
     .filter((p) => !p.data.draft)
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
@@ -29,10 +41,18 @@ export const GET: APIRoute = async () => {
       writing
         .map((p) => `- [${p.data.title}](${abs(`/writing/${p.id}.md`)}): ${p.data.description}`)
         .join("\n"),
-    `## Projects\n` +
-      projects
-        .map((p) => `- [${p.data.title}](${abs(`/projects/${p.id}.md`)}): ${p.data.description}`)
+    `## Notes\n- [Notes index](${abs("/notes.md")}): Short notes from what I'm learning in public.\n` +
+      notes
+        .map((p) => `- [${p.data.title}](${abs(`/notes/${p.id}.md`)}): ${p.data.description}`)
         .join("\n"),
+    `## Reading\n- [Reading index](${abs("/reading.md")}): Books, papers, and references I'm working through.\n` +
+      reading
+        .map((p) => `- [${p.data.title}](${abs(`/reading/${p.id}.md`)}): ${p.data.description}`)
+        .join("\n"),
+    `## Now\n` +
+      (now[0]
+        ? `- [${now[0].data.title}](${abs("/now.md")}): ${now[0].data.description}`
+        : `- [Now](${abs("/now.md")}): Current focus.`),
     `## Work\n` +
       work
         .map(
@@ -43,6 +63,17 @@ export const GET: APIRoute = async () => {
         .join("\n"),
     `## About\n- [About](${abs("/about.md")}): A few words about who I am.`,
   ];
+
+  if (projects.length) {
+    blocks.splice(
+      -2,
+      0,
+      `## Projects\n` +
+        projects
+          .map((p) => `- [${p.data.title}](${abs(`/projects/${p.id}.md`)}): ${p.data.description}`)
+          .join("\n"),
+    );
+  }
 
   return new Response(blocks.join("\n\n") + "\n", {
     headers: { "Content-Type": "text/plain; charset=utf-8" },
